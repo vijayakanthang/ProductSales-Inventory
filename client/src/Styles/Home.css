@@ -1,0 +1,218 @@
+/* .t {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    flex-direction: column;
+  }
+  
+  .top {
+    position: relative;
+    display: flex;
+    width: 90vw;
+    justify-content: space-around;
+  }
+  
+  .table {
+    margin-top: 1%;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    padding: 1px;
+    border-collapse: collapse;
+  }
+  
+  .card {
+    background-color: white;
+    border: #000 solid 3px;
+  }
+  
+  .pagination {
+    display: flex;
+    width: 90vw;
+    justify-content: space-around;
+  }
+  
+  .pagenumber {
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+    text-decoration: none;
+  }
+  
+  .page-item {
+    border-radius: 3px;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    text-decoration: none;
+    background-color: gold;
+    color: #000000e3;
+    font-size: larger;
+  }
+  
+  .active {
+    background-color: aquamarine;
+  }
+  
+  option {
+    text-align: center;
+  }
+  
+  select {
+    height: 20px;
+    border: none;
+  }
+  
+  .sb {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+  }
+  
+  .b-n-s {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .barchart {
+    background-color: gray;
+  }
+  
+  .stats {
+    background-color: gray;
+  }
+   */
+
+
+   body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .t {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .top {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .b-n-s {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .stats, .barchart {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 45%;
+  }
+  .stats-1{
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    font-size: larger;
+    justify-content: space-around;
+    
+
+
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+  }
+  
+  .pagenumber a {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color:  rgb(78, 78, 78);;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .pagenumber .active {
+    background-color:#007bff;
+  }
+  
+  img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
