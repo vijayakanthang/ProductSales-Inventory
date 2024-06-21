@@ -118,7 +118,7 @@ const Home = () => {
 
   return (
     <div className='t'>
-      <h1>Roxiler Product-Transaction</h1>
+      <h1>Inventory Management</h1>
       <br/>
       <div className='top'>
         <form onSubmit={e => e.preventDefault()}>
@@ -232,7 +232,7 @@ const Home = () => {
           Next Page &gt;
         </button>
       </div>
-      {/* <button >seed</button>*/}
+      {/* <button >seed</button> */}
     </div>
   );
 };
