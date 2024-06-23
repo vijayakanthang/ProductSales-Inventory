@@ -1,97 +1,3 @@
-/* .t {
-    display: flex;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    flex-direction: column;
-  }
-  
-  .top {
-    position: relative;
-    display: flex;
-    width: 90vw;
-    justify-content: space-around;
-  }
-  
-  .table {
-    margin-top: 1%;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    padding: 1px;
-    border-collapse: collapse;
-  }
-  
-  .card {
-    background-color: white;
-    border: #000 solid 3px;
-  }
-  
-  .pagination {
-    display: flex;
-    width: 90vw;
-    justify-content: space-around;
-  }
-  
-  .pagenumber {
-    display: flex;
-    justify-content: space-around;
-    width: 40vw;
-    text-decoration: none;
-  }
-  
-  .page-item {
-    border-radius: 3px;
-    text-align: center;
-    height: 20px;
-    width: 20px;
-    text-decoration: none;
-    background-color: gold;
-    color: #000000e3;
-    font-size: larger;
-  }
-  
-  .active {
-    background-color: aquamarine;
-  }
-  
-  option {
-    text-align: center;
-  }
-  
-  select {
-    height: 20px;
-    border: none;
-  }
-  
-  .sb {
-    display: flex;
-    justify-content: space-around;
-    width: 100vw;
-  }
-  
-  .b-n-s {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-    height: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .barchart {
-    background-color: gray;
-  }
-  
-  .stats {
-    background-color: gray;
-  }
-   */
-
-
    body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -109,6 +15,10 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
   }
+
+  .navbar{
+    width: 100%;
+  }
   
   .top {
     display: flex;
@@ -118,7 +28,7 @@
     margin-bottom: 20px;
   }
   
-  input[type="text"] {
+  input{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -133,17 +43,18 @@
   
   .b-n-s {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     margin-bottom: 20px;
+    align-items: center;
   }
   
-  .stats, .barchart {
+  .stats, .barchart ,.linechart {
     background-color: #fafafa;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 45%;
+    width: 70%;
   }
   .stats-1{
     display: flex;
@@ -151,9 +62,6 @@
     flex-direction: column;
     font-size: larger;
     justify-content: space-around;
-    
-
-
   }
   
   .table {
@@ -183,7 +91,7 @@
   }
   
   .pagination button {
-    background-color: #007bff;
+    background-color: rgba(49, 204, 204, 0.725);;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -207,12 +115,45 @@
   }
   
   .pagenumber .active {
-    background-color:#007bff;
+    background-color: rgba(21, 200, 200, 0.725);;
   }
   
   img {
     max-width: 100px;
     height: auto;
     border-radius: 5px;
+  }
+  .statistics-container {
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .filter {
+    margin-bottom: 20px;
+  }
+  
+  .stats {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+  .barchart {
+    margin-top: 20px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .linechart{
+    margin-top: 20px;
+
   }
   

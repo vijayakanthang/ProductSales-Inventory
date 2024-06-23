@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .statistics-container {
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .filter {
+    margin-bottom: 20px;
+  }
+  
+  .stats {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+  }
+  
+  .stats-1 {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    font-size: larger;
+    justify-content: space-around;
+  }
+  
+  .barchart, .linechart {
+    margin-top: 20px;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
