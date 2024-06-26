@@ -9,7 +9,7 @@ const Statistics = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('https://product-sales-inventory-5vnj.vercel.app/stats');
+      const response = await axios.get('https://productsales-inventory.onrender.com/stats');
       setStats(response.data);
     };
     fetchData();

@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('https://product-sales-inventory-5vnj.vercel.app/products');
+      const response = await axios.get('https://productsales-inventory.onrender.com/products');
       setProducts(response.data);
       setFilteredProducts(response.data);
       setDateFilteredProducts(response.data); 

@@ -24,7 +24,7 @@ const AddItem = () => {
     };
 
     try {
-      const response = await axios.post('https://product-sales-inventory-5vnj.vercel.app/', newItem);
+      const response = await axios.post('https://productsales-inventory.onrender.com/', newItem);
       if (response.status === 200) {
         alert('Item added successfully');
         // Clear form inputs
