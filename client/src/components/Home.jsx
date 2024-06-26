@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('https://productsales-inventory.onrender.com/products');
+      const response = await axios.get('http://localhost:5000/products');
       setProducts(response.data);
       setFilteredProducts(response.data);
       setDateFilteredProducts(response.data); 

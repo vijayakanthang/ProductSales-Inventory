@@ -1,85 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Bar, Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import '../Styles/Statistics.css';
 
 const Statistics = () => {
   const [month, setMonth] = useState('ALL');
-  const [products, setProducts] = useState([]);
-  const [dateFilteredProducts, setDateFilteredProducts] = useState([]);
+  const [stats, setStats] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('https://productsales-inventory.onrender.com/products');
-      setProducts(response.data);
-      setDateFilteredProducts(response.data);
+      const response = await axios.get('http://localhost:5001/stats');
+      setStats(response.data);
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const filterByMonth = () => {
-      if (month === 'ALL') {
-        setDateFilteredProducts(products);
-      } else {
-        const filtered = products.filter(product => {
-          const productMonth = new Date(product.dateOfSale).getMonth() + 1; // getMonth is zero-indexed
-          return productMonth === parseInt(month);
-        });
-        setDateFilteredProducts(filtered);
-      }
-    };
-    filterByMonth();
-  }, [month, products]);
+  const allMonths = ['ALL', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  let tot_sum = 0;
-  let tot_sold = 0;
-  let tot_notsold = 0;
-  let chartdata = Array(10).fill(0);
+  const filteredStats = month === 'ALL' ? stats : stats.filter(stat => stat._id === parseInt(month));
 
-  const allMonths = ['-ALL', '-January', '-February', '-March', '-April', '-May', '-June', '-July', '-August', '-September', '-October', '-November', '-December'];
+  const soldData = allMonths.slice(1).map((_, idx) => filteredStats.filter(stat => stat._id === idx + 1 && stat.soldStats.some(s => s.sold)).reduce((acc, curr) => acc + curr.soldStats.filter(s => s.sold).reduce((a, c) => a + c.count, 0), 0));
+  const notSoldData = allMonths.slice(1).map((_, idx) => filteredStats.filter(stat => stat._id === idx + 1 && stat.soldStats.some(s => !s.sold)).reduce((acc, curr) => acc + curr.soldStats.filter(s => !s.sold).reduce((a, c) => a + c.count, 0), 0));
 
-  dateFilteredProducts.forEach(product => {
-    tot_sum += product.price;
-    if (product.sold) {
-      tot_sold += 1;
-    } else {
-      tot_notsold += 1;
-    }
+  // Log data for debugging
+  console.log('Filtered Stats:', filteredStats);
+  console.log('Sold Data:', soldData);
+  console.log('Not Sold Data:', notSoldData);
 
-    if (product.sold) {
-      const price = product.price;
-      if (price < 100) chartdata[0] += 1;
-      else if (price < 200) chartdata[1] += 1;
-      else if (price < 300) chartdata[2] += 1;
-      else if (price < 400) chartdata[3] += 1;
-      else if (price < 500) chartdata[4] += 1;
-      else if (price < 600) chartdata[5] += 1;
-      else if (price < 700) chartdata[6] += 1;
-      else if (price < 800) chartdata[7] += 1;
-      else if (price < 900) chartdata[8] += 1;
-      else chartdata[9] += 1;
-    }
-  });
-
-  const handleMonthChange = (e) => {
-    setMonth(e.target.value);
-  };
+  const totalItemsSold = filteredStats.reduce((acc, stat) => acc + stat.soldStats.filter(s => s.sold).reduce((a, c) => a + c.count, 0), 0);
+  const totalPriceSold = filteredStats.reduce((acc, stat) => acc + stat.soldStats.filter(s => s.sold).reduce((a, c) => a + c.totalAmount, 0), 0);
 
   const lineChartData = {
     labels: allMonths.slice(1),
     datasets: [
       {
         label: 'Sold Products',
-        data: allMonths.slice(1).map((_, idx) => products.filter(product => new Date(product.dateOfSale).getMonth() === idx && product.sold).length),
+        data: soldData,
         fill: false,
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
       },
       {
         label: 'Not Sold Products',
-        data: allMonths.slice(1).map((_, idx) => products.filter(product => new Date(product.dateOfSale).getMonth() === idx && !product.sold).length),
+        data: notSoldData,
         fill: false,
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
@@ -87,50 +50,78 @@ const Statistics = () => {
     ]
   };
 
+  const priceRangeLabels = [
+    '0-100',
+    '101-200',
+    '201-300',
+    '301-400',
+    '401-500',
+    '501-600',
+    '601-700',
+    '701-800',
+    '801-900',
+    '901-above'
+  ];
+
+  const barChartData = {
+    labels: priceRangeLabels,
+    datasets: [
+      {
+        label: 'Products Sold',
+        data: filteredStats.reduce((acc, stat) => {
+          stat.soldStats.forEach(s => {
+            if (s.sold) {
+              const avgPrice = s.totalAmount / s.count; // average price per product in this group
+              if (avgPrice < 100) acc[0] += s.count;
+              else if (avgPrice < 200) acc[1] += s.count;
+              else if (avgPrice < 300) acc[2] += s.count;
+              else if (avgPrice < 400) acc[3] += s.count;
+              else if (avgPrice < 500) acc[4] += s.count;
+              else if (avgPrice < 600) acc[5] += s.count;
+              else if (avgPrice < 700) acc[6] += s.count;
+              else if (avgPrice < 800) acc[7] += s.count;
+              else if (avgPrice < 900) acc[8] += s.count;
+              else acc[9] += s.count;
+            }
+          });
+          return acc;
+        }, Array(10).fill(0)),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }
+    ]
+  };
+
+  const handleMonthChange = (e) => {
+    setMonth(e.target.value);
+  };
+
   return (
     <div className='statistics-container'>
       <div className='header'>
-        <h1>Statistics {allMonths[month]}</h1>
+        <h1>Statistics for {month === 'ALL' ? 'All Months' : allMonths[parseInt(month)]}</h1>
       </div>
       <div className='filter'>
         <select value={month} onChange={handleMonthChange}>
-          <option value='ALL'>All</option>
-          {allMonths.slice(1).map((m, idx) => (
-            <option key={idx + 1} value={idx + 1}>{m}</option>
+          {allMonths.map((m, idx) => (
+            <option key={idx} value={idx === 0 ? 'ALL' : idx}>{m}</option>
           ))}
         </select>
       </div>
-      <div className='stats'>
-        <p>Total sales: ${tot_sum.toFixed(2)}</p>
-        <p>Total sold items: {tot_sold}</p>
-        <p>Total not sold items: {tot_notsold}</p>
+      <div className='total-items'>
+        <h1>Total Items & Price Sold</h1>
+        <p>Total Price of Sold Items: ${totalPriceSold.toFixed(2)}</p>
+        <p>Total Items Sold: {totalItemsSold}</p>
+      </div>
+      <div className='linechart'>
+        <h1>Line Chart</h1>
+        <Line data={lineChartData} options={{ responsive: true }} />
       </div>
       <div className='barchart'>
-        <h1>Bar Chart {allMonths[month]}</h1>
+        <h1>Bar Chart</h1>
         <Bar
-          data={{
-            labels: [
-              '0-100',
-              '101-200',
-              '201-300',
-              '301-400',
-              '401-500',
-              '501-600',
-              '601-700',
-              '701-800',
-              '801-900',
-              '901-above'
-            ],
-            datasets: [
-              {
-                label: 'Products Sold',
-                data: chartdata,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-              }
-            ]
-          }}
+          data={barChartData}
           options={{
             responsive: true,
             scales: {
@@ -141,11 +132,6 @@ const Statistics = () => {
           }}
         />
       </div>
-      <div className='linechart'>
-        <h1>Line Chart {allMonths[month]}</h1>
-        <Line data={lineChartData} options={{ responsive: true }} />
-      </div>
-
     </div>
   );
 }

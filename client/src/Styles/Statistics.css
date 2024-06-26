@@ -51,3 +51,22 @@ body {
     font-size: 16px;
   }
   
+  .total-items {
+    margin-top: 20px;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+  }
+  
+  .total-items h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    
+  }
+  
+  .total-items p {
+    font-size: 1.2em;
+  }
+  
