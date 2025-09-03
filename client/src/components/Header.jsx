@@ -1,17 +1,35 @@
-import React from 'react'
-import '../Styles/Header.css'
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import "../Styles/Header.css";
 
 const Header = () => {
   return (
-    <div>
-      <div className='nav-bar'>
-        <Link to ='/' className='p'><p >Inventory</p></Link>
-        <Link to ='/stats' className='p'><p >Statistics</p></Link>
-        <Link to ='/additem' className='p'><p >Add Item</p></Link>
-      </div>
-    </div>
-  )
-}
+    <motion.div
+      className="nav-bar"
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <Link to="/" className="nav-link">
+          Inventory
+        </Link>
+      </motion.div>
 
-export default Header
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <Link to="/stats" className="nav-link">
+          Statistics
+        </Link>
+      </motion.div>
+
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <Link to="/additem" className="nav-link">
+          Add Item
+        </Link>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default Header;
